@@ -40,6 +40,8 @@ function Education(): ReactElement {
             setData(data.map(item => item.id === formData.id ? formData : item));
         }
 
+        setSchoolFormError(errorDisplay.none);
+        setDegreeFormError(errorDisplay.none);
         setFormData({
             id: "",
             schoolName: "",
