@@ -36,7 +36,7 @@ function Work(): ReactElement {
                 location: formData.location,
                 description: formData.description
             };
-            
+
             setData([...data, newFormData]);
         } else {
             setData(data.map(item => item.id === formData.id ? formData : item));
@@ -55,8 +55,20 @@ function Work(): ReactElement {
     }
 
     const cancelButtonHandler = () => {
-
+        setEditMode(false);
+        setCompanyFormError(errorDisplay.none);
+        setPositionFormError(errorDisplay.none);
+        setFormData({
+            id: "",
+            company: "",
+            position: "",
+            startDate: "",
+            endDate: "",
+            location: "",
+            description: ""
+        });
     }
+    
     const addButtonHandler = (item: WorkExperienceFormData) => {
 
     }
