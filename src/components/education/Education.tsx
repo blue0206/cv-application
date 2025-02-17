@@ -136,8 +136,8 @@ function Education(): ReactElement {
                             />
                         </div>
                         <div className="form-element">
-                            <Button type="submit" children="Save" className="edu-save" onClick={saveButtonHandler} />
-                            <Button type="reset" children="Cancel" className="edu-cancel" onClick={cancelButtonHandler} />
+                            <Button type="submit" className="edu-save" onClick={saveButtonHandler}>Save</Button>
+                            <Button type="reset" className="edu-cancel" onClick={cancelButtonHandler}>Cancel</Button>
                         </div>
                     </form>
                 ) : (
@@ -146,8 +146,7 @@ function Education(): ReactElement {
                             data && data.map(item => {
                                 return (
                                     <Button 
-                                        key={item.schoolName + item.degree} 
-                                        type="button" 
+                                        key={item.id} 
                                         className="edu-item" 
                                         onClick={() => editButtonHandler(item)} 
                                     >
@@ -156,10 +155,9 @@ function Education(): ReactElement {
                                 )
                             })
                         }
-                        <Button type="button" children="Add" className="edu-add" onClick={addButtonHandler} />
+                        <Button className="edu-add" onClick={addButtonHandler}>Add Education Details</Button>
                     </div>
                 )
-                
             }
         </>
     );
