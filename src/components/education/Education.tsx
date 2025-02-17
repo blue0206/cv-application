@@ -2,11 +2,12 @@ import React, { ReactElement, useState } from "react";
 import { v4 as uuidv4 } from "uuid";
 import { Label, Input, Button } from "..";
 import { EducationFormData } from "../../interfaces";
+import { errorDisplay } from "../../types";
 
 function Education(): ReactElement {
     const [editMode, setEditMode] = useState(false);
-    const [schoolFormError, setSchoolFormError] = useState<("block" | "none")>("none");
-    const [degreeFormError, setDegreeFormError] = useState<("block" | "none")>("none");
+    const [schoolFormError, setSchoolFormError] = useState<(errorDisplay)>(errorDisplay.none);
+    const [degreeFormError, setDegreeFormError] = useState<(errorDisplay)>(errorDisplay.none);
     const [data, setData] = useState<EducationFormData[]>([]);
     const [formData, setFormData] = useState<EducationFormData>({
         id: "",
@@ -20,8 +21,8 @@ function Education(): ReactElement {
     const saveButtonHandler = (e: React.MouseEvent<HTMLButtonElement>): void => {
         e.preventDefault();
         if (!formData.schoolName.trim() || !formData.degree.trim()) {
-            setSchoolFormError(formData.schoolName.trim() ? "none" : "block");
-            setDegreeFormError(formData.degree.trim() ? "none" : "block");
+            setSchoolFormError(formData.schoolName.trim() ? errorDisplay.none : errorDisplay.block);
+            setDegreeFormError(formData.degree.trim() ? errorDisplay.none : errorDisplay.block);
             return;
         }
         if (!formData.id) {
@@ -53,8 +54,8 @@ function Education(): ReactElement {
     const cancelButtonHandler = (e:  React.MouseEvent<HTMLButtonElement>): void => {
         e.preventDefault();
         setEditMode(false);
-        setSchoolFormError("none");
-        setDegreeFormError("none");
+        setSchoolFormError(errorDisplay.none);
+        setDegreeFormError(errorDisplay.none);
         setFormData({
             id: "",
             schoolName: "",
