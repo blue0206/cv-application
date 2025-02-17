@@ -22,8 +22,8 @@ function Work(): ReactElement {
     const saveButtonHandler = (e: React.MouseEvent<HTMLButtonElement>): void => {
         e.preventDefault();
         if (!formData.company.trim() || !formData.position.trim()) {
-            setCompanyFormError(formData.company.trim() ? errorDisplay.block : errorDisplay.none);
-            setPositionFormError(formData.position.trim() ? errorDisplay.block : errorDisplay.none);
+            setCompanyFormError(formData.company.trim() ? errorDisplay.none : errorDisplay.block);
+            setPositionFormError(formData.position.trim() ? errorDisplay.none : errorDisplay.block);
             return;
         }
         if (!formData.id) {
@@ -41,6 +41,9 @@ function Work(): ReactElement {
         } else {
             setData(data.map(item => item.id === formData.id ? formData : item));
         }
+
+        setCompanyFormError(errorDisplay.none);
+        setPositionFormError(errorDisplay.none);
 
         setFormData({
             id: "",
