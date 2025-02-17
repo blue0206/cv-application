@@ -3,3 +3,8 @@ export type DetailSubmitButtonStyle = {
     width: string;
     display: string
 }
+
+export enum errorDisplay {
+  none = "none",
+  block = "block",
+}
