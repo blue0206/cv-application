@@ -5,6 +5,8 @@ import { EducationFormData } from "../../interfaces";
 
 function Education(): ReactElement {
     const [editMode, setEditMode] = useState(false);
+    const [schoolFormError, setSchoolFormError] = useState<("block" | "none")>("none");
+    const [degreeFormError, setDegreeFormError] = useState<("block" | "none")>("none");
     const [data, setData] = useState<EducationFormData[]>([]);
     const [formData, setFormData] = useState<EducationFormData>({
         id: "",
@@ -17,6 +19,11 @@ function Education(): ReactElement {
 
     const saveButtonHandler = (e: React.MouseEvent<HTMLButtonElement>): void => {
         e.preventDefault();
+        if (!formData.schoolName.trim() || !formData.degree.trim()) {
+            setSchoolFormError(formData.schoolName.trim() ? "none" : "block");
+            setDegreeFormError(formData.degree.trim() ? "none" : "block");
+            return;
+        }
         if (!formData.id) {
             const newFormData: EducationFormData = {
                 id: uuidv4(),
@@ -46,6 +53,8 @@ function Education(): ReactElement {
     const cancelButtonHandler = (e:  React.MouseEvent<HTMLButtonElement>): void => {
         e.preventDefault();
         setEditMode(false);
+        setSchoolFormError("none");
+        setDegreeFormError("none");
         setFormData({
             id: "",
             schoolName: "",
@@ -80,6 +89,7 @@ function Education(): ReactElement {
                                 value={formData.schoolName} 
                                 onChange={(e) => setFormData({...formData, schoolName: e.target.value})} 
                             />
+                            <div style={{display: schoolFormError}} className="form-error">*School name is required.</div>
                         </div>
                         <div className="form-element">
                             <Label for="degree">Degree</Label>
@@ -90,6 +100,7 @@ function Education(): ReactElement {
                                 value={formData.degree} 
                                 onChange={(e) => setFormData({...formData, degree: e.target.value})}
                             />
+                            <div style={{display: degreeFormError}} className="form-error">*Degree detail is required.</div>
                         </div>
                         <div className="form-element dates">
                             <div className="start-date">
