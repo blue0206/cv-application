@@ -60,4 +60,8 @@ body {
 
     min-height: 98vh;
     min-height: 100dvh;
+
+    display: grid;
+    grid-template: 1fr / 1fr;
+    padding: 16px;
 }
