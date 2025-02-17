@@ -68,9 +68,14 @@ function Work(): ReactElement {
             description: ""
         });
     }
-    
-    const addButtonHandler = (item: WorkExperienceFormData) => {
 
+    const addButtonHandler = () => {
+        setEditMode(true);
+    }
+
+    const editButtonHandler = (currentData: WorkExperienceFormData) => {
+        setFormData(currentData);
+        setEditMode(true);
     }
 
     return (
@@ -156,14 +161,14 @@ function Work(): ReactElement {
                                     <Button 
                                         key={item.id} 
                                         className="work-item" 
-                                        onClick={() => addButtonHandler(item)}
+                                        onClick={() => editButtonHandler(item)}
                                     >
                                         {item.company}
                                     </Button>
                                 )
                             })
                         }
-                        <Button className="work-add">Add Work Experience</Button>
+                        <Button className="work-add" onClick={addButtonHandler}>Add Work Experience</Button>
                     </div>
                 )
             }
