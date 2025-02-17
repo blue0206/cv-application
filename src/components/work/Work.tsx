@@ -19,9 +19,47 @@ function Work(): ReactElement {
         description: ""
     });
 
-    const saveButtonHandler = () => {}
-    const cancelButtonHandler = () => {}
-    const addButtonHandler = (item: WorkExperienceFormData) => {}
+    const saveButtonHandler = (e: React.MouseEvent<HTMLButtonElement>): void => {
+        e.preventDefault();
+        if (!formData.company.trim() || !formData.position.trim()) {
+            setCompanyFormError(formData.company.trim() ? errorDisplay.block : errorDisplay.none);
+            setPositionFormError(formData.position.trim() ? errorDisplay.block : errorDisplay.none);
+            return;
+        }
+        if (!formData.id) {
+            const newFormData: WorkExperienceFormData = {
+                id: uuidv4(),
+                company: formData.company,
+                position: formData.position,
+                startDate: formData.startDate,
+                endDate: formData.endDate,
+                location: formData.location,
+                description: formData.description
+            };
+            
+            setData([...data, newFormData]);
+        } else {
+            setData(data.map(item => item.id === formData.id ? formData : item));
+        }
+
+        setFormData({
+            id: "",
+            company: "",
+            position: "",
+            startDate: "",
+            endDate: "",
+            location: "",
+            description: ""
+        });
+        setEditMode(false);
+    }
+
+    const cancelButtonHandler = () => {
+
+    }
+    const addButtonHandler = (item: WorkExperienceFormData) => {
+
+    }
 
     return (
         <>
@@ -94,8 +132,8 @@ function Work(): ReactElement {
                             />
                         </div>
                         <div className="form-element">
-                            <Button type="submit" className="edu-save" >Save</Button>
-                            <Button type="reset" className="edu-cancel" >Cancel</Button>
+                            <Button type="submit" className="edu-save" onClick={saveButtonHandler}>Save</Button>
+                            <Button type="reset" className="edu-cancel" onClick={cancelButtonHandler}>Cancel</Button>
                         </div>
                     </form>
                 ) : (
