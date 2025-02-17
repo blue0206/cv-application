@@ -51,8 +51,7 @@ function Education(): ReactElement {
         setEditMode(false);
     }
 
-    const cancelButtonHandler = (e:  React.MouseEvent<HTMLButtonElement>): void => {
-        e.preventDefault();
+    const cancelButtonHandler = (): void => {
         setEditMode(false);
         setSchoolFormError(errorDisplay.none);
         setDegreeFormError(errorDisplay.none);
