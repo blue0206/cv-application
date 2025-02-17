@@ -13,27 +13,21 @@ type InputProps = {
 
 function Input(
     {
-        name,
-        id,
         type="text",
-        placeholder="",
-        pattern="",
-        required=false,
-        value="",
-        onChange=()=>{}
+        ...props
     }: InputProps
 ): ReactElement {
     return (
         <>
             <input 
-                name={name} 
-                id={id} 
+                name={props.name} 
+                id={props.id} 
                 type={type} 
-                placeholder={placeholder} 
-                pattern={pattern} 
-                required={required} 
-                value={value} 
-                onChange={onChange} 
+                placeholder={props.placeholder} 
+                pattern={props.pattern} 
+                required={props.required} 
+                value={props.value} 
+                onChange={props.onChange} 
             />
         </>
     )
