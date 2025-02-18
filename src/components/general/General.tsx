@@ -5,7 +5,7 @@ import { GeneralInfoFormData } from '../../interfaces';
 
 type SectionProps = {
     stateValue: GeneralInfoFormData;
-    stateHandler: (item: string) => void;
+    stateHandler: (data: string, key: keyof GeneralInfoFormData) => void;
 }
 
 function General(props: SectionProps): ReactElement {
@@ -20,7 +20,7 @@ function General(props: SectionProps): ReactElement {
                         id="fullname" 
                         placeholder="Your Name..." 
                         value={props.stateValue.fullname} 
-                        onChange={(e) => props.stateHandler(e.target.value)} 
+                        onChange={(e) => props.stateHandler(e.target.value, "fullname")} 
                     />
                 </div>
                 <div className="form-element">
@@ -31,7 +31,7 @@ function General(props: SectionProps): ReactElement {
                         id="email" 
                         placeholder="example@mail.com" 
                         value={props.stateValue.email} 
-                        onChange={(e) => props.stateHandler(e.target.value)} 
+                        onChange={(e) => props.stateHandler(e.target.value, "email")} 
                     />
                 </div>
                 <div className="form-element">
@@ -41,7 +41,7 @@ function General(props: SectionProps): ReactElement {
                         name="phone" 
                         id="phone" 
                         value={props.stateValue.phone} 
-                        onChange={(e) => props.stateHandler(e.target.value)} 
+                        onChange={(e) => props.stateHandler(e.target.value, "phone")} 
                     />
                 </div>
                 <div className="form-element">
@@ -51,7 +51,7 @@ function General(props: SectionProps): ReactElement {
                         id="location" 
                         placeholder="New York, US" 
                         value={props.stateValue.location} 
-                        onChange={(e) => props.stateHandler(e.target.value)} 
+                        onChange={(e) => props.stateHandler(e.target.value, "location")} 
                     />
                 </div>
             </form>
