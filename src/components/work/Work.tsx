@@ -1,6 +1,6 @@
 import { ReactElement, useState } from "react";
 import { v4 as uuidv4 } from 'uuid';
-import { Label, Input, Button } from "..";
+import { Label, Input, Button, Textarea } from "..";
 import { WorkExperienceFormData } from "../../interfaces";
 import { errorDisplay } from "../../types";
 
@@ -140,10 +140,10 @@ function Work({stateValue, stateHandler, dataState, setDataState}: SectionProps)
                         </div>
                         <div className="form-element">
                             <Label for="job-description">Job Description</Label>
-                            <Input 
+                            <Textarea 
                                 id="job-description" 
                                 name="job-description" 
-                                placeholder="Describe your role and responsibilities." 
+                                placeholder="Describe your role and responsibilities..." 
                                 value={stateValue.description} 
                                 onChange={(e) => stateHandler(e.target.value, "description")} 
                             />
