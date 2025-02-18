@@ -4,45 +4,42 @@ import { Label, Input, Button } from "..";
 import { EducationFormData } from "../../interfaces";
 import { errorDisplay } from "../../types";
 
-function Education(): ReactElement {
+type SectionProps = {
+    stateValue: EducationFormData;
+    stateHandler: (item: string | EducationFormData, key?: keyof EducationFormData) => void;
+}
+
+function Education({stateValue, stateHandler}: SectionProps): ReactElement {
     const [editMode, setEditMode] = useState(false);
     const [schoolFormError, setSchoolFormError] = useState<(errorDisplay)>(errorDisplay.none);
     const [degreeFormError, setDegreeFormError] = useState<(errorDisplay)>(errorDisplay.none);
     const [data, setData] = useState<EducationFormData[]>([]);
-    const [formData, setFormData] = useState<EducationFormData>({
-        id: "",
-        schoolName: "",
-        degree: "",
-        startDate: "",
-        endDate: "",
-        location: ""
-    });
 
     const saveButtonHandler = (e: React.MouseEvent<HTMLButtonElement>): void => {
         e.preventDefault();
-        if (!formData.schoolName.trim() || !formData.degree.trim()) {
-            setSchoolFormError(formData.schoolName.trim() ? errorDisplay.none : errorDisplay.block);
-            setDegreeFormError(formData.degree.trim() ? errorDisplay.none : errorDisplay.block);
+        if (!stateValue.schoolName.trim() || !stateValue.degree.trim()) {
+            setSchoolFormError(stateValue.schoolName.trim() ? errorDisplay.none : errorDisplay.block);
+            setDegreeFormError(stateValue.degree.trim() ? errorDisplay.none : errorDisplay.block);
             return;
         }
-        if (!formData.id) {
+        if (!stateValue.id) {
             const newFormData: EducationFormData = {
                 id: uuidv4(),
-                schoolName: formData.schoolName,
-                degree: formData.degree,
-                startDate: formData.startDate,
-                endDate: formData.endDate,
-                location: formData.location
+                schoolName: stateValue.schoolName,
+                degree: stateValue.degree,
+                startDate: stateValue.startDate,
+                endDate: stateValue.endDate,
+                location: stateValue.location
             };
-    
+
             setData([...data, newFormData]);
         } else {
-            setData(data.map(item => item.id === formData.id ? formData : item));
+            setData(data.map(item => item.id === stateValue.id ? stateValue : item));
         }
 
         setSchoolFormError(errorDisplay.none);
         setDegreeFormError(errorDisplay.none);
-        setFormData({
+        stateHandler({
             id: "",
             schoolName: "",
             degree: "",
@@ -57,7 +54,7 @@ function Education(): ReactElement {
         setEditMode(false);
         setSchoolFormError(errorDisplay.none);
         setDegreeFormError(errorDisplay.none);
-        setFormData({
+        stateHandler({
             id: "",
             schoolName: "",
             degree: "",
@@ -72,7 +69,7 @@ function Education(): ReactElement {
     }
 
     const editButtonHandler = (currentData: EducationFormData): void => {
-        setFormData(currentData);
+        stateHandler(currentData);
         setEditMode(true);
     }
 
@@ -88,8 +85,8 @@ function Education(): ReactElement {
                                 id="school" 
                                 name="school" 
                                 placeholder="School / University name" 
-                                value={formData.schoolName} 
-                                onChange={(e) => setFormData({...formData, schoolName: e.target.value})} 
+                                value={stateValue.schoolName} 
+                                onChange={(e) => stateHandler(e.target.value, "schoolName")} 
                             />
                             <div style={{display: schoolFormError}} className="form-error">*School name is required.</div>
                         </div>
@@ -99,8 +96,8 @@ function Education(): ReactElement {
                                 id="degree" 
                                 name="degree" 
                                 placeholder="Degree / Study field" 
-                                value={formData.degree} 
-                                onChange={(e) => setFormData({...formData, degree: e.target.value})}
+                                value={stateValue.degree} 
+                                onChange={(e) => stateHandler(e.target.value, "degree")} 
                             />
                             <div style={{display: degreeFormError}} className="form-error">*Degree detail is required.</div>
                         </div>
@@ -111,8 +108,8 @@ function Education(): ReactElement {
                                     type="date" 
                                     id="school-start" 
                                     name="school-start" 
-                                    value={formData.startDate} 
-                                    onChange={(e) => setFormData({...formData, startDate: e.target.value})}
+                                    value={stateValue.startDate} 
+                                    onChange={(e) => stateHandler(e.target.value, "startDate")} 
                                 />
                             </div>
                             <div className="end-date">
@@ -121,8 +118,8 @@ function Education(): ReactElement {
                                     type="date" 
                                     id="school-end" 
                                     name="school-end" 
-                                    value={formData.endDate} 
-                                    onChange={(e) => setFormData({...formData, endDate: e.target.value})}
+                                    value={stateValue.endDate}  
+                                    onChange={(e) => stateHandler(e.target.value, "endDate")} 
                                 />
                             </div>
                         </div>
@@ -132,8 +129,8 @@ function Education(): ReactElement {
                                 id="school-location" 
                                 name="school-location" 
                                 placeholder="School / University location" 
-                                value={formData.location} 
-                                onChange={(e) => setFormData({...formData, location: e.target.value})} 
+                                value={stateValue.location}  
+                                onChange={(e) => stateHandler(e.target.value, "location")} 
                             />
                         </div>
                         <div className="form-element">
