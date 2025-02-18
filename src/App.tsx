@@ -27,6 +27,8 @@ function App() {
         location: "",
         description: ""
     });
+	const [educationData, setEducationData] = useState<EducationFormData[]>([]);
+	const [workData, setWorkData] = useState<WorkExperienceFormData[]>([]);
 
 	const handleGeneralFormData = (data: string, key: keyof GeneralInfoFormData) => {
         setGeneralFormData({...generalFormData, [key]: data});
@@ -47,12 +49,31 @@ function App() {
 		<>
 			<main>
 				<div className="section-details">
-					<General stateValue={generalFormData} stateHandler={(item, key)=>handleGeneralFormData(item, key)} />
-					<Education stateValue={educationFormData} stateHandler={(item, key)=>handleEducationFormData(item, key)} />
-					<Work stateValue={workFormData} stateHandler={(item, key)=>handleWorkFormData(item, key)} />
+					<General 
+						stateValue={generalFormData} 
+						stateHandler={(item, key)=>handleGeneralFormData(item, key)} 
+					/>
+					<Work 
+						stateValue={workFormData} 
+						stateHandler={(item, key)=>handleWorkFormData(item, key)} 
+						dataState={workData}
+						setDataState={setWorkData} 
+					/>
+					<Education 
+						stateValue={educationFormData} 
+						stateHandler={(item, key)=>handleEducationFormData(item, key)} 
+						dataState={educationData} 
+						setDataState={setEducationData} 
+					/>
 				</div>
 				<div className="section-preview">
-					<Preview></Preview>
+					<Preview 
+						generalDetails={generalFormData} 
+						educationDetails={educationFormData} 
+						workDetails={workFormData} 
+						educationDetailsList={educationData}
+						workDetailsList={workData} 
+					/>
 				</div>
 			</main>
 		</>
