@@ -7,13 +7,14 @@ import { errorDisplay } from "../../types";
 type SectionProps = {
     stateValue: WorkExperienceFormData;
     stateHandler: (item: string | WorkExperienceFormData, key?: keyof WorkExperienceFormData) => void;
+    dataState: WorkExperienceFormData[];
+    setDataState: (data: WorkExperienceFormData[]) => void;
 }
 
-function Work({stateValue, stateHandler}: SectionProps): ReactElement {
+function Work({stateValue, stateHandler, dataState, setDataState}: SectionProps): ReactElement {
     const [editMode, setEditMode] = useState(false);
     const [companyFormError, setCompanyFormError] = useState<errorDisplay>(errorDisplay.none);
     const [positionFormError, setPositionFormError] = useState<errorDisplay>(errorDisplay.none);
-    const [data, setData] = useState<WorkExperienceFormData[]>([]);
 
     const saveButtonHandler = (e: React.MouseEvent<HTMLButtonElement>): void => {
         e.preventDefault();
@@ -33,9 +34,9 @@ function Work({stateValue, stateHandler}: SectionProps): ReactElement {
                 description: stateValue.description
             };
 
-            setData([...data, newFormData]);
+            setDataState([...dataState, newFormData]);
         } else {
-            setData(data.map(item => item.id === stateValue.id ? stateValue : item));
+            setDataState(dataState.map(item => item.id === stateValue.id ? stateValue : item));
         }
 
         setCompanyFormError(errorDisplay.none);
@@ -78,7 +79,7 @@ function Work({stateValue, stateHandler}: SectionProps): ReactElement {
     }
 
     return (
-        <>
+        <div className="detail work">
             <h1>Work Experience</h1>
             {
                 editMode ? (
@@ -155,7 +156,7 @@ function Work({stateValue, stateHandler}: SectionProps): ReactElement {
                 ) : (
                     <div className="work-list">
                         {
-                            data && data.map(item => {
+                            dataState && dataState.map(item => {
                                 return (
                                     <Button 
                                         key={item.id} 
@@ -171,7 +172,7 @@ function Work({stateValue, stateHandler}: SectionProps): ReactElement {
                     </div>
                 )
             }
-        </>
+        </div>
     );
 }
 
