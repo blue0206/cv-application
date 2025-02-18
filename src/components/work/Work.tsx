@@ -4,48 +4,44 @@ import { Label, Input, Button } from "..";
 import { WorkExperienceFormData } from "../../interfaces";
 import { errorDisplay } from "../../types";
 
-function Work(): ReactElement {
+type SectionProps = {
+    stateValue: WorkExperienceFormData;
+    stateHandler: (item: string | WorkExperienceFormData, key?: keyof WorkExperienceFormData) => void;
+}
+
+function Work({stateValue, stateHandler}: SectionProps): ReactElement {
     const [editMode, setEditMode] = useState(false);
     const [companyFormError, setCompanyFormError] = useState<errorDisplay>(errorDisplay.none);
     const [positionFormError, setPositionFormError] = useState<errorDisplay>(errorDisplay.none);
     const [data, setData] = useState<WorkExperienceFormData[]>([]);
-    const [formData, setFormData] = useState<WorkExperienceFormData>({
-        id: "",
-        company: "",
-        position: "",
-        startDate: "",
-        endDate: "",
-        location: "",
-        description: ""
-    });
 
     const saveButtonHandler = (e: React.MouseEvent<HTMLButtonElement>): void => {
         e.preventDefault();
-        if (!formData.company.trim() || !formData.position.trim()) {
-            setCompanyFormError(formData.company.trim() ? errorDisplay.none : errorDisplay.block);
-            setPositionFormError(formData.position.trim() ? errorDisplay.none : errorDisplay.block);
+        if (!stateValue.company.trim() || !stateValue.position.trim()) {
+            setCompanyFormError(stateValue.company.trim() ? errorDisplay.none : errorDisplay.block);
+            setPositionFormError(stateValue.position.trim() ? errorDisplay.none : errorDisplay.block);
             return;
         }
-        if (!formData.id) {
+        if (!stateValue.id) {
             const newFormData: WorkExperienceFormData = {
                 id: uuidv4(),
-                company: formData.company,
-                position: formData.position,
-                startDate: formData.startDate,
-                endDate: formData.endDate,
-                location: formData.location,
-                description: formData.description
+                company: stateValue.company,
+                position: stateValue.position,
+                startDate: stateValue.startDate,
+                endDate: stateValue.endDate,
+                location: stateValue.location,
+                description: stateValue.description
             };
 
             setData([...data, newFormData]);
         } else {
-            setData(data.map(item => item.id === formData.id ? formData : item));
+            setData(data.map(item => item.id === stateValue.id ? stateValue : item));
         }
 
         setCompanyFormError(errorDisplay.none);
         setPositionFormError(errorDisplay.none);
 
-        setFormData({
+        stateHandler({
             id: "",
             company: "",
             position: "",
@@ -61,7 +57,7 @@ function Work(): ReactElement {
         setEditMode(false);
         setCompanyFormError(errorDisplay.none);
         setPositionFormError(errorDisplay.none);
-        setFormData({
+        stateHandler({
             id: "",
             company: "",
             position: "",
@@ -77,7 +73,7 @@ function Work(): ReactElement {
     }
 
     const editButtonHandler = (currentData: WorkExperienceFormData) => {
-        setFormData(currentData);
+        stateHandler(currentData);
         setEditMode(true);
     }
 
@@ -93,8 +89,8 @@ function Work(): ReactElement {
                                 id="company" 
                                 name="company" 
                                 placeholder="Company name" 
-                                value={formData.company} 
-                                onChange={(e) => setFormData({...formData, company: e.target.value})} 
+                                value={stateValue.company} 
+                                onChange={(e) => stateHandler(e.target.value, "company")} 
                             />
                             <div style={{display: companyFormError}} className="form-error">*Company name is required.</div>
                         </div>
@@ -104,8 +100,8 @@ function Work(): ReactElement {
                                 id="position" 
                                 name="position" 
                                 placeholder="Position/Job title" 
-                                value={formData.position} 
-                                onChange={(e) => setFormData({...formData, position: e.target.value})} 
+                                value={stateValue.position} 
+                                onChange={(e) => stateHandler(e.target.value, "position")} 
                             />
                             <div style={{display: positionFormError}} className="form-error">*Position detail is required.</div>
                         </div>
@@ -116,8 +112,8 @@ function Work(): ReactElement {
                                     type="date" 
                                     id="job-start" 
                                     name="job-start" 
-                                    value={formData.startDate} 
-                                    onChange={(e) => setFormData({...formData, startDate: e.target.value})} 
+                                    value={stateValue.startDate} 
+                                    onChange={(e) => stateHandler(e.target.value, "startDate")} 
                                 />
                             </div>
                             <div className="end-date">
@@ -126,8 +122,8 @@ function Work(): ReactElement {
                                     type="date" 
                                     id="job-end" 
                                     name="job-end" 
-                                    value={formData.endDate} 
-                                    onChange={(e) => setFormData({...formData, endDate: e.target.value})} 
+                                    value={stateValue.endDate} 
+                                    onChange={(e) => stateHandler(e.target.value, "endDate")} 
                                 />
                             </div>
                         </div>
@@ -137,8 +133,8 @@ function Work(): ReactElement {
                                 id="company-location" 
                                 name="company-location" 
                                 placeholder="City or Country" 
-                                value={formData.location} 
-                                onChange={(e) => setFormData({...formData, location: e.target.value})}
+                                value={stateValue.location} 
+                                onChange={(e) => stateHandler(e.target.value, "location")}
                             />
                         </div>
                         <div className="form-element">
@@ -147,8 +143,8 @@ function Work(): ReactElement {
                                 id="job-description" 
                                 name="job-description" 
                                 placeholder="Describe your role and responsibilities." 
-                                value={formData.description} 
-                                onChange={(e) => setFormData({...formData, description: e.target.value})} 
+                                value={stateValue.description} 
+                                onChange={(e) => stateHandler(e.target.value, "description")} 
                             />
                         </div>
                         <div className="form-element">
