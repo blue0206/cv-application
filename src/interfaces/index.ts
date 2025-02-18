@@ -1,3 +1,10 @@
+export interface GeneralInfoFormData {
+    fullname: string;
+    email: string;
+    phone: string;
+    location: string;
+}
+
 export interface EducationFormData {
     id: string;
     schoolName: string;
