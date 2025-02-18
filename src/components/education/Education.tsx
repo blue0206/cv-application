@@ -7,13 +7,14 @@ import { errorDisplay } from "../../types";
 type SectionProps = {
     stateValue: EducationFormData;
     stateHandler: (item: string | EducationFormData, key?: keyof EducationFormData) => void;
+    dataState: EducationFormData[];
+    setDataState: (data: EducationFormData[]) => void;
 }
 
-function Education({stateValue, stateHandler}: SectionProps): ReactElement {
+function Education({stateValue, stateHandler, dataState, setDataState}: SectionProps): ReactElement {
     const [editMode, setEditMode] = useState(false);
     const [schoolFormError, setSchoolFormError] = useState<(errorDisplay)>(errorDisplay.none);
     const [degreeFormError, setDegreeFormError] = useState<(errorDisplay)>(errorDisplay.none);
-    const [data, setData] = useState<EducationFormData[]>([]);
 
     const saveButtonHandler = (e: React.MouseEvent<HTMLButtonElement>): void => {
         e.preventDefault();
@@ -32,9 +33,9 @@ function Education({stateValue, stateHandler}: SectionProps): ReactElement {
                 location: stateValue.location
             };
 
-            setData([...data, newFormData]);
+            setDataState([...dataState, newFormData]);
         } else {
-            setData(data.map(item => item.id === stateValue.id ? stateValue : item));
+            setDataState(dataState.map(item => item.id === stateValue.id ? stateValue : item));
         }
 
         setSchoolFormError(errorDisplay.none);
@@ -74,7 +75,7 @@ function Education({stateValue, stateHandler}: SectionProps): ReactElement {
     }
 
     return (
-        <>
+        <div className="detail education">
             <h1>Education Details</h1>
             {
                 editMode ? (
@@ -141,7 +142,7 @@ function Education({stateValue, stateHandler}: SectionProps): ReactElement {
                 ) : (
                     <div className="edu-list">
                         {
-                            data && data.map(item => {
+                            dataState && dataState.map(item => {
                                 return (
                                     <Button 
                                         key={item.id} 
@@ -157,7 +158,7 @@ function Education({stateValue, stateHandler}: SectionProps): ReactElement {
                     </div>
                 )
             }
-        </>
+        </div>
     );
 }
 
