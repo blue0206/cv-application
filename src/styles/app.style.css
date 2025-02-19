@@ -162,3 +162,38 @@ main:has(> .section-details) {
 .form-error {
     color: red;
 }
+
+.preview {
+    display: grid;
+    grid-template-rows: 0.35fr 1fr;
+}
+
+.preview > header {
+    display: grid;
+    grid-template-rows: 1fr 0.5;
+    background-color: #374151;
+    color: aliceblue;
+}
+
+header > .heading {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.heading > h1 {
+    justify-self: center;
+    font-size: 3.2rem;
+    font-weight: bold;
+    flex-grow: 1;
+    text-align: center;
+}
+
+header > .personal-details {
+    display: flex;
+    justify-content: space-evenly;
+}
+
+.preview > main {
+    background-color: aliceblue;
+}
