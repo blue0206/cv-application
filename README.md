@@ -1,50 +1,88 @@
-# React + TypeScript + Vite
+# Resume Generator using Vite + TypeScript + React
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+A modern, responsive resume builder application built with React and TypeScript.  
 
-Currently, two official plugins are available:
+Note: This app doesn't generate resume, my purpose was to practice React 
+and specifically state-lifting. I didn't focus on CSS so adding too many details 
+may lead to overflow. I'll be looking forward to your feedback! You can always find
+me on [Discord](https://discordapp.com/users/blue_0206) 
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+[Live Preview](https://cv-application-five-eta.vercel.app/)
 
-## Expanding the ESLint configuration
+## Features
 
-If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
+- 📝 Live Preview - See your changes in real-time
 
-- Configure the top-level `parserOptions` property like this:
+## Tech Stack
 
-```js
-export default tseslint.config({
-  languageOptions: {
-    // other options...
-    parserOptions: {
-      project: ['./tsconfig.node.json', './tsconfig.app.json'],
-      tsconfigRootDir: import.meta.dirname,
-    },
-  },
-})
+- React
+- TypeScript
+
+## Prerequisites
+
+Before you begin, ensure you have installed:
+- Node.js (v18 or higher)
+- npm (v9 or higher)
+
+## Installation
+
+1. Clone the repository:
+```bash
+git clone https://github.com/blue0206/cv-application.git
 ```
 
-- Replace `tseslint.configs.recommended` to `tseslint.configs.recommendedTypeChecked` or `tseslint.configs.strictTypeChecked`
-- Optionally add `...tseslint.configs.stylisticTypeChecked`
-- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and update the config:
-
-```js
-// eslint.config.js
-import react from 'eslint-plugin-react'
-
-export default tseslint.config({
-  // Set the react version
-  settings: { react: { version: '18.3' } },
-  plugins: {
-    // Add the react plugin
-    react,
-  },
-  rules: {
-    // other rules...
-    // Enable its recommended rules
-    ...react.configs.recommended.rules,
-    ...react.configs['jsx-runtime'].rules,
-  },
-})
+2. Navigate to the project directory:
+```bash
+cd cv-application
 ```
+
+3. Install dependencies:
+```bash
+npm install
+```
+
+## Development
+
+To start the development server:
+
+```bash
+npm run dev
+```
+
+This will start the application in development mode. 
+Open [http://localhost:5173](http://localhost:5173) to view it in your browser.
+
+## Building for Production
+
+To create a production build:
+
+```bash
+npm run build
+```
+
+This will create an optimized build in the `dist` directory.
+
+To preview the production build locally:
+
+```bash
+npm run preview
+```
+
+## Project Structure
+
+```
+cv-application/
+├── src/
+│   ├── components/    # React components
+│   ├── styles/        # CSS styles
+│   ├── types/         # TypeScript type definitions
+│   ├── interfaces/    # TypeScript interface definitions
+│   ├── utils/         # Utility functions
+│   ├── App.tsx        # Main application component
+│   └── main.tsx       # Application entry point
+└── index.html         # HTML template
+```
+
+## Acknowledgments
+
+- Built as part of The Odin Project curriculum
