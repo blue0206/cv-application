@@ -1,66 +1,8 @@
 @import "./index.style.css";
 
-main:has(> .section-details) {
-    display: grid;
-    grid-template-columns: 0.85fr 1fr;
-    grid-template-areas: 'details preview';
-    justify-content: space-between;
-    padding: 32px 16px;
-    gap: 32px;
-
-    height: 100%;
-    width: 100%;
-}
-
-.section-details {
-    grid-area: details;
-
-    display: grid;
-    grid-template-rows: repeat(3, 1fr);
-    grid-template-columns: 1fr;
-    gap: 8px;
-    width: 100%;
-    max-height: 92vh;
-    overflow: auto;
-    border-radius: 8px;
-    padding: 11px;
-}
-
-.section-preview {
-    grid-area: preview;
-    aspect-ratio: 1/1.414;
-    display: grid;
-    grid-template-columns: 1fr;
-    width: 100%;
-    max-height: 95vh;
-
-    padding: 25px 32px;
-
-    box-shadow: rgb(0, 0, 0) 0 4px 8px -2px,
-        rgb(0, 0, 0) 0 0 1px;
-}
-
-.detail {
-    border-radius: 8px;
-    padding: 26px;
-    box-shadow: 0 4px 8px -2px rgb(0, 0, 0), 0 0 1px rgb(0, 0, 0);
-
-    display: flex;
-    flex-direction: column;
-    gap: 16px;
-}
-
-.form-element {
-    display: flex;
-    flex-direction: column;
-    gap: 8px;
-}
-
 label {
     font-size: 0.85rem;
     color: #374151;
-    margin-bottom: 5px;
-    margin-top: 11px;
     font-weight: bold;
 }
 
@@ -116,23 +58,105 @@ button:hover {
     opacity: 0.8;
 }
 
-button.edu-add, button.work-add {
-    align-self: center;
-    justify-self: center;
+main:has(> .section-details) {
+    display: grid;
+    grid-template-columns: 0.85fr 1fr;
+    grid-template-areas: 'details preview';
+    justify-content: space-between;
+    padding: 32px 16px;
+    gap: 32px;
+
+    height: 100%;
+    width: 100%;
 }
 
-.work-list {
+.section-details {
+    grid-area: details;
+
+    display: grid;
+    grid-template-rows: repeat(3, 1fr);
+    grid-template-columns: 1fr;
+    gap: 8px;
+    width: 100%;
+    max-height: 92vh;
+    overflow: auto;
+    border-radius: 8px;
+    padding: 11px;
+}
+
+.section-preview {
+    grid-area: preview;
+    aspect-ratio: 1/1.414;
+    display: grid;
+    grid-template-columns: 1fr;
+    width: 100%;
+    max-height: 95vh;
+
+    padding: 25px 32px;
+
+    box-shadow: rgb(0, 0, 0) 0 4px 8px -2px,
+        rgb(0, 0, 0) 0 0 1px;
+}
+
+.detail {
+    border-radius: 8px;
+    padding: 26px;
+    box-shadow: 0 4px 8px -2px rgb(0, 0, 0), 0 0 1px rgb(0, 0, 0);
+
     display: flex;
     flex-direction: column;
+    gap: 11px;
 }
 
-.work-item {
+.detail form {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+.form-element {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+
+.form-element:has(> button) {
+    display: flex;
+    flex-direction: row;
+    gap: 16px;
+}
+
+.work-list, .edu-list {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 8px;
+}
+
+.work-list > div, .edu-list > div {
+    display: grid;
+    grid-template-columns: 1fr auto;
+    gap: 5px;
+}
+
+.work-item, .edu-item {
+    background-color: #326ede;
+    align-items: center;
+}
+
+.save {
     flex-grow: 1;
+    padding-block: 5px;
+    background-color: rgb(115, 175, 100);
 }
 
-.work-add {
-    margin-bottom: 16px;
-    margin-inline: auto;
+.cancel {
+    flex-grow: 1;
+    padding-block: 5px;
+    background-color: rgb(104, 104, 104);
+}
+
+.remove-item {
+    background-color: rgb(205, 87, 87);
 }
 
 .form-error {
