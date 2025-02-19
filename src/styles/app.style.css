@@ -244,4 +244,5 @@ header > .personal-details {
 
 .term {
     display: flex;
+    gap: 4px;
 }
