@@ -1,9 +1,8 @@
 @import "./index.style.css";
 
-main {
+main:has(> .section-details) {
     display: grid;
     grid-template-columns: 0.85fr 1fr;
-    grid-template-rows: 1fr;
     grid-template-areas: 'details preview';
     justify-content: space-between;
     padding: 32px 16px;
@@ -18,17 +17,22 @@ main {
 
     display: grid;
     grid-template-rows: repeat(3, 1fr);
-    gap: 16px;
+    grid-template-columns: 1fr;
+    gap: 8px;
+    width: 100%;
+    max-height: 92vh;
+    overflow: auto;
+    border-radius: 8px;
+    padding: 11px;
 }
 
 .section-preview {
     grid-area: preview;
-    @page {
-        size: A4;
-    }
+    aspect-ratio: 1/1.414;
     display: grid;
     grid-template-columns: 1fr;
-    
+    width: 100%;
+    max-height: 95vh;
 
     padding: 25px 32px;
 
@@ -46,75 +50,57 @@ main {
     gap: 16px;
 }
 
+.form-element {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
 label {
-    display: block;
-    font-size: 0.875rem;
+    font-size: 0.85rem;
     color: #374151;
-    margin-bottom: 0.5rem;
-    margin-top: 1rem;
+    margin-bottom: 5px;
+    margin-top: 11px;
     font-weight: bold;
 }
 
 input {
     width: 100%;
-    padding: 0.625rem;
-    border: 1px solid #D1D5DB;
-    border-radius: 0.375rem;
-    font-size: 0.875rem;
-    line-height: 1.25rem;
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 11px;
+    font-size: 1rem;
     color: #1F2937;
-    background-color: white;
-    transition: border-color 0.15s ease-in-out;
+    background-color: rgb(243, 244, 245);
 }
 
 input:focus {
     outline: none;
     border-color: #3B82F6;
     box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
-    
 }
 
-input::placeholder {
-    color: #9CA3AF;
-    
-}
-
-input:disabled {
-    background-color: #F3F4F6;
-    cursor: not-allowed;
-    
+input::placeholder, textarea::placeholder {
+    color: #8a8f98;
 }
 
 textarea {
     width: 100%;
     min-height: 100px;
-    padding: 0.625rem;
+    padding: 4px;
     border: 1px solid #D1D5DB;
-    border-radius: 0.375rem;
-    font-size: 0.875rem;
-    line-height: 1.25rem;
+    border-radius: 11px;
+    font-size: 1rem;
     color: #1F2937;
-    background-color: white;
+    background-color: rgb(243, 244, 245);
     resize: vertical;
     max-height: 350px;
-    transition: border-color 0.15s ease-in-out;
 }
 
 textarea:focus {
     outline: none;
     border-color: #3B82F6;
     box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
-    
-}
-
-textarea::placeholder {
-    color: #9CA3AF;
-    
-}
-
-textarea:disabled {
-    background-color: #F3F4F6;
-    cursor: not-allowed;
     
 }
 
@@ -148,21 +134,6 @@ button.edu-add, button.work-add {
     margin-bottom: 16px;
     margin-inline: auto;
 }
-
-label {
-    font-size: 1rem;
-    color: #333;
-    margin-bottom: 8px;
-}
-
-input {
-    width: 100%;
-    padding: 8px;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-    font-size: 1rem;
-}
-
 
 .form-error {
     color: red;
