@@ -7,12 +7,10 @@ type LabelProps = {
 
 function Label(props: LabelProps): ReactElement {
     return (
-        <>
-            <label htmlFor={props.for}>
-                {props.children}
-            </label>
-        </>
-    )
+        <label htmlFor={props.for}>
+            {props.children}
+        </label>
+    );
 }
 
 export default Label;

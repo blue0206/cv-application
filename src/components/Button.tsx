@@ -14,17 +14,15 @@ function Button({
     ...props
 }: ButtonProps): ReactElement {
     return (
-        <>
-            <button 
-                key={props.key} 
-                type={type} 
-                className={props.className} 
-                id={props.id} 
-                onClick={props.onClick} 
-            >
-                {props.children}
-            </button>
-        </>
+        <button 
+            key={props.key} 
+            type={type} 
+            className={props.className} 
+            id={props.id} 
+            onClick={props.onClick} 
+        >
+            {props.children}
+        </button>
     );
 }
 

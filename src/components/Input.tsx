@@ -18,20 +18,18 @@ function Input(
     }: InputProps
 ): ReactElement {
     return (
-        <>
-            <input 
-                name={props.name} 
-                id={props.id} 
-                type={type} 
-                placeholder={props.placeholder} 
-                pattern={props.pattern} 
-                required={props.required} 
-                value={props.value} 
-                onChange={props.onChange} 
-                maxLength={88}
-            />
-        </>
-    )
+        <input 
+            name={props.name} 
+            id={props.id} 
+            type={type} 
+            placeholder={props.placeholder} 
+            pattern={props.pattern} 
+            required={props.required} 
+            value={props.value} 
+            onChange={props.onChange} 
+            maxLength={88}
+        />
+    );
 }
 
 export default Input;
