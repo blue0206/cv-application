@@ -9,6 +9,18 @@ type SectionProps = {
     workDetailsList: WorkExperienceFormData[];
 }
 
+// Type guard
+function isWorkFormData (data: EducationFormData | WorkExperienceFormData): data is WorkExperienceFormData {
+    return (data as WorkExperienceFormData).company ? true : false;
+}
+
+function checkDetailsEmpty (data: EducationFormData | WorkExperienceFormData): boolean {
+    if (!isWorkFormData(data)) {
+        return Object.keys(data).some(key => data[key as keyof EducationFormData]);
+    }
+    return Object.keys(data).some(key => data[key as keyof WorkExperienceFormData]);
+}
+
 function Preview({generalDetails, educationDetails, workDetails, educationDetailsList, workDetailsList}: SectionProps): ReactElement {
     return (
         <div className="preview">
@@ -31,7 +43,7 @@ function Preview({generalDetails, educationDetails, workDetails, educationDetail
                                 workDetailsList.map(detail => {
                                     return (
                                         detail.id === workDetails.id ? (
-                                            <div className="experience-detail">
+                                            <div key={workDetails.id} className="experience-detail">
                                                 <div className="left-detail">
                                                     <div className="company-name">{workDetails.company}</div>
                                                     <div className="position-name">{workDetails.position}</div>
@@ -46,7 +58,7 @@ function Preview({generalDetails, educationDetails, workDetails, educationDetail
                                                 </div>
                                             </div>
                                         ) : (
-                                            <div className="experience-detail">
+                                            <div key={detail.id} className="experience-detail">
                                                 <div className="left-detail">
                                                     <div className="company-name">{detail.company}</div>
                                                     <div className="position-name">{detail.position}</div>
@@ -65,7 +77,27 @@ function Preview({generalDetails, educationDetails, workDetails, educationDetail
                                 })
                             }
                         </section>
-                    ) : null
+                    ) : (
+                        (checkDetailsEmpty(workDetails)) && (
+                            <section className="work">
+                                <h2 className="heading-two">Work Experience</h2>
+                                <div className="experience-detail">
+                                    <div className="left-detail">
+                                        <div className="company-name">{workDetails.company}</div>
+                                        <div className="position-name">{workDetails.position}</div>
+                                        <div className="position-details">{workDetails.description}</div>
+                                    </div>
+                                    <div className="right-detail">
+                                        <div className="term">
+                                            <div className="term-start">{workDetails.startDate}</div>
+                                            <div className="term-end">{workDetails.endDate}</div>
+                                        </div>
+                                        <div className="location-detail">{workDetails.location}</div>
+                                    </div>
+                                </div>
+                            </section>
+                        )
+                    )
                 }
                 {
                     educationDetailsList.length > 0 ? (
@@ -75,7 +107,7 @@ function Preview({generalDetails, educationDetails, workDetails, educationDetail
                                 educationDetailsList.map(detail => {
                                     return (
                                         detail.id === educationDetails.id ? (
-                                            <div className="education-detail">
+                                            <div key={educationDetails.id} className="education-detail">
                                                 <div className="left-detail">
                                                     <div className="institute-name">{educationDetails.schoolName}</div>
                                                     <div className="degree-name">{educationDetails.degree}</div>
@@ -89,7 +121,7 @@ function Preview({generalDetails, educationDetails, workDetails, educationDetail
                                                 </div>
                                             </div>
                                         ) : (
-                                            <div className="education-detail">
+                                            <div key={detail.id} className="education-detail">
                                                 <div className="left-detail">
                                                     <div className="institute-name">{detail.schoolName}</div>
                                                     <div className="degree-name">{detail.degree}</div>
@@ -108,7 +140,26 @@ function Preview({generalDetails, educationDetails, workDetails, educationDetail
                             }
                             <div>{educationDetails.degree}</div>
                         </section>
-                    ) : null
+                    ) : (
+                        (checkDetailsEmpty(educationDetails)) && (
+                            <section className="education">
+                                <h2 className="heading-two">Education Details</h2>
+                                <div className="education-detail">
+                                    <div className="left-detail">
+                                        <div className="institute-name">{educationDetails.schoolName}</div>
+                                        <div className="degree-name">{educationDetails.degree}</div>
+                                    </div>
+                                    <div className="right-detail">
+                                        <div className="term">
+                                            <div className="term-start">{educationDetails.startDate}</div>
+                                            <div className="term-end">{educationDetails.endDate}</div>
+                                        </div>
+                                        <div className="location-detail">{educationDetails.location}</div>
+                                    </div>
+                                </div>
+                            </section>
+                        )
+                    )
                 }
             </main>
         </div>
