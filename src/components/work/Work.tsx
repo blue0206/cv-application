@@ -78,6 +78,10 @@ function Work({stateValue, stateHandler, dataState, setDataState}: SectionProps)
         setEditMode(true);
     }
 
+    const removeButtonHandler = (id: string) => {
+        setDataState(dataState.filter(item => item.id !== id));
+    }
+
     return (
         <div className="detail work">
             <h1>Work Experience</h1>
@@ -158,13 +162,20 @@ function Work({stateValue, stateHandler, dataState, setDataState}: SectionProps)
                         {
                             dataState && dataState.map(item => {
                                 return (
-                                    <Button 
-                                        key={item.id} 
-                                        className="work-item" 
-                                        onClick={() => editButtonHandler(item)}
-                                    >
-                                        {item.company}
-                                    </Button>
+                                    <div key={item.id} >
+                                        <Button 
+                                            className="work-item" 
+                                            onClick={() => editButtonHandler(item)}
+                                        >
+                                            {item.company}
+                                        </Button>
+                                        <Button
+                                            className="remove-item" 
+                                            onClick={() => removeButtonHandler(item.id)}
+                                        >
+                                            Remove
+                                        </Button>
+                                    </div>
                                 )
                             })
                         }
