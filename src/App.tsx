@@ -30,6 +30,10 @@ function App() {
 	const [educationData, setEducationData] = useState<EducationFormData[]>([]);
 	const [workData, setWorkData] = useState<WorkExperienceFormData[]>([]);
 
+	// I know I could've handled this like I handled educationData and workData states but
+	// I wanted to try this approach using callbacks. It's not the best way to do it though.
+	// I did learn some new stuff about typescript and also about the keyof operator which is 
+	// really cool!
 	const handleGeneralFormData = (data: string, key: keyof GeneralInfoFormData) => {
         setGeneralFormData({...generalFormData, [key]: data});
     };
