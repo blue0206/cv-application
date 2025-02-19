@@ -41,6 +41,7 @@ function General(props: SectionProps): ReactElement {
                         name="phone" 
                         id="phone" 
                         value={props.stateValue.phone} 
+                        placeholder="Your phone number..." 
                         onChange={(e) => props.stateHandler(e.target.value, "phone")} 
                     />
                 </div>
