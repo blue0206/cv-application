@@ -1,5 +1,6 @@
 import { ReactElement } from "react";
 import { EducationFormData, GeneralInfoFormData, WorkExperienceFormData } from "../../interfaces";
+import dateFormatter from "../../utils/dateFormatter";
 
 type SectionProps = {
     generalDetails: GeneralInfoFormData;
@@ -51,8 +52,13 @@ function Preview({generalDetails, educationDetails, workDetails, educationDetail
                                                 </div>
                                                 <div className="right-detail">
                                                     <div className="term">
-                                                        <div className="term-start">{workDetails.startDate}</div>
-                                                        <div className="term-end">{workDetails.endDate}</div>
+                                                        <div className="term-start">{dateFormatter(workDetails.startDate)}</div>
+                                                        {
+                                                            workDetails.endDate ? (
+                                                                <div className="separator">—</div>
+                                                            ) : (null)
+                                                        }
+                                                        <div className="term-end">{dateFormatter(workDetails.endDate)}</div>
                                                     </div>
                                                     <div className="location-detail">{workDetails.location}</div>
                                                 </div>
@@ -66,8 +72,13 @@ function Preview({generalDetails, educationDetails, workDetails, educationDetail
                                                 </div>
                                                 <div className="right-detail">
                                                     <div className="term">
-                                                        <div className="term-start">{detail.startDate}</div>
-                                                        <div className="term-end">{detail.endDate}</div>
+                                                        <div className="term-start">{dateFormatter(detail.startDate)}</div>
+                                                        {
+                                                            detail.endDate ? (
+                                                                <div className="separator">—</div>
+                                                            ) : (null)
+                                                        }
+                                                        <div className="term-end">{dateFormatter(detail.endDate)}</div>
                                                     </div>
                                                     <div className="location-detail">{detail.location}</div>
                                                 </div>
@@ -89,8 +100,13 @@ function Preview({generalDetails, educationDetails, workDetails, educationDetail
                                     </div>
                                     <div className="right-detail">
                                         <div className="term">
-                                            <div className="term-start">{workDetails.startDate}</div>
-                                            <div className="term-end">{workDetails.endDate}</div>
+                                            <div className="term-start">{dateFormatter(workDetails.startDate)}</div>
+                                            {
+                                                workDetails.endDate ? (
+                                                    <div className="separator">—</div>
+                                                ) : (null)
+                                            }
+                                            <div className="term-end">{dateFormatter(workDetails.endDate)}</div>
                                         </div>
                                         <div className="location-detail">{workDetails.location}</div>
                                     </div>
@@ -114,8 +130,13 @@ function Preview({generalDetails, educationDetails, workDetails, educationDetail
                                                 </div>
                                                 <div className="right-detail">
                                                     <div className="term">
-                                                        <div className="term-start">{educationDetails.startDate}</div>
-                                                        <div className="term-end">{educationDetails.endDate}</div>
+                                                        <div className="term-start">{dateFormatter(educationDetails.startDate)}</div>
+                                                        {
+                                                            educationDetails.endDate ? (
+                                                                <div className="separator">—</div>
+                                                            ) : (null)
+                                                        }
+                                                        <div className="term-end">{dateFormatter(educationDetails.endDate)}</div>
                                                     </div>
                                                     <div className="location-detail">{educationDetails.location}</div>
                                                 </div>
@@ -128,8 +149,13 @@ function Preview({generalDetails, educationDetails, workDetails, educationDetail
                                                 </div>
                                                 <div className="right-detail">
                                                     <div className="term">
-                                                        <div className="term-start">{detail.startDate}</div>
-                                                        <div className="term-end">{detail.endDate}</div>
+                                                        <div className="term-start">{dateFormatter(detail.startDate)}</div>
+                                                        {
+                                                            detail.endDate ? (
+                                                                <div className="separator">—</div>
+                                                            ) : (null)
+                                                        }
+                                                        <div className="term-end">{dateFormatter(detail.endDate)}</div>
                                                     </div>
                                                     <div className="location-detail">{detail.location}</div>
                                                 </div>
@@ -151,8 +177,13 @@ function Preview({generalDetails, educationDetails, workDetails, educationDetail
                                     </div>
                                     <div className="right-detail">
                                         <div className="term">
-                                            <div className="term-start">{educationDetails.startDate}</div>
-                                            <div className="term-end">{educationDetails.endDate}</div>
+                                            <div className="term-start">{dateFormatter(educationDetails.startDate)}</div>
+                                            {
+                                                educationDetails.endDate ? (
+                                                    <div className="separator">—</div>
+                                                ) : (null)
+                                            }
+                                            <div className="term-end">{dateFormatter(educationDetails.endDate)}</div>
                                         </div>
                                         <div className="location-detail">{educationDetails.location}</div>
                                     </div>
