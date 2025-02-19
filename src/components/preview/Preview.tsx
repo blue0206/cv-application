@@ -22,6 +22,18 @@ function checkDetailsEmpty (data: EducationFormData | WorkExperienceFormData): b
     return Object.keys(data).some(key => data[key as keyof WorkExperienceFormData]);
 }
 
+function checkDetailExists (data: EducationFormData | WorkExperienceFormData, list: EducationFormData[] | WorkExperienceFormData[]): boolean {
+    if (!isWorkFormData(data)) {
+        const exists = (list as EducationFormData[]).some(item => item.schoolName === data.schoolName);
+        if (exists) return true;
+        return false;
+    }
+    const exists = (list as WorkExperienceFormData[]).some(item => item.company === data.company);
+    if (exists) return true;
+    return false;
+
+}
+
 function Preview({generalDetails, educationDetails, workDetails, educationDetailsList, workDetailsList}: SectionProps): ReactElement {
     return (
         <div className="preview">
@@ -86,6 +98,29 @@ function Preview({generalDetails, educationDetails, workDetails, educationDetail
                                         )
                                     )
                                 })
+                            }
+                            {
+                                (checkDetailsEmpty(workDetails) && !checkDetailExists(workDetails, workDetailsList)) ? (
+                                    <div className="experience-detail">
+                                        <div className="left-detail">
+                                            <div className="company-name">{workDetails.company}</div>
+                                            <div className="position-name">{workDetails.position}</div>
+                                            <div className="position-details">{workDetails.description}</div>
+                                        </div>
+                                        <div className="right-detail">
+                                            <div className="term">
+                                                <div className="term-start">{dateFormatter(workDetails.startDate)}</div>
+                                                {
+                                                    workDetails.endDate ? (
+                                                        <div className="separator">—</div>
+                                                    ) : (null)
+                                                }
+                                                <div className="term-end">{dateFormatter(workDetails.endDate)}</div>
+                                            </div>
+                                            <div className="location-detail">{workDetails.location}</div>
+                                        </div>
+                                    </div>
+                                ) : (null)
                             }
                         </section>
                     ) : (
@@ -164,7 +199,28 @@ function Preview({generalDetails, educationDetails, workDetails, educationDetail
                                     )
                                 })
                             }
-                            <div>{educationDetails.degree}</div>
+                            {
+                                (checkDetailsEmpty(educationDetails) && !checkDetailExists(educationDetails, educationDetailsList)) ? (
+                                    <div className="experience-detail">
+                                        <div className="left-detail">
+                                            <div className="institute-name">{educationDetails.schoolName}</div>
+                                            <div className="degree-name">{educationDetails.degree}</div>
+                                        </div>
+                                        <div className="right-detail">
+                                            <div className="term">
+                                                <div className="term-start">{dateFormatter(educationDetails.startDate)}</div>
+                                                {
+                                                    educationDetails.endDate ? (
+                                                        <div className="separator">—</div>
+                                                    ) : (null)
+                                                }
+                                                <div className="term-end">{dateFormatter(educationDetails.endDate)}</div>
+                                            </div>
+                                            <div className="location-detail">{educationDetails.location}</div>
+                                        </div>
+                                    </div>
+                                ) : (null)
+                            }
                         </section>
                     ) : (
                         (checkDetailsEmpty(educationDetails)) && (
