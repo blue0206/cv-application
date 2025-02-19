@@ -64,4 +64,6 @@ body {
     display: grid;
     grid-template: 1fr / 1fr;
     padding: 16px;
+
+    background-color: #c0cfe5;
 }
