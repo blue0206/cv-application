@@ -153,8 +153,8 @@ function Work({stateValue, stateHandler, dataState, setDataState}: SectionProps)
                             />
                         </div>
                         <div className="form-element">
-                            <Button type="submit" className="edu-save" onClick={saveButtonHandler}>Save</Button>
-                            <Button type="reset" className="edu-cancel" onClick={cancelButtonHandler}>Cancel</Button>
+                            <Button type="submit" className="save" onClick={saveButtonHandler}>Save</Button>
+                            <Button type="reset" className="cancel" onClick={cancelButtonHandler}>Cancel</Button>
                         </div>
                     </form>
                 ) : (
