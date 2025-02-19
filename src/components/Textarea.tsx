@@ -16,6 +16,7 @@ function Textarea(props: TextareaProps): ReactElement {
             placeholder={props.placeholder} 
             value={props.value} 
             onChange={props.onChange} 
+            maxLength={400}
         >
         </textarea>
     )

@@ -28,6 +28,7 @@ function Input(
                 required={props.required} 
                 value={props.value} 
                 onChange={props.onChange} 
+                maxLength={88}
             />
         </>
     )
