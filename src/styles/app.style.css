@@ -216,11 +216,9 @@ header > .personal-details {
     display: flex;
     flex-direction: column;
     gap: 16px;
-    flex-grow: 1;
 }
 
 .experience-detail, .education-detail {
-    flex-grow: 1;
     display: grid;
     grid-template-columns: 1fr 0.45fr;
     gap: 11px;
