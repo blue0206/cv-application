@@ -74,6 +74,10 @@ function Education({stateValue, stateHandler, dataState, setDataState}: SectionP
         setEditMode(true);
     }
 
+    const removeButtonHandler = (id: string) => {
+        setDataState(dataState.filter(item => item.id !== id));
+    }
+
     return (
         <div className="detail education">
             <h1>Education Details</h1>
@@ -144,13 +148,20 @@ function Education({stateValue, stateHandler, dataState, setDataState}: SectionP
                         {
                             dataState && dataState.map(item => {
                                 return (
-                                    <Button 
-                                        key={item.id} 
-                                        className="edu-item" 
-                                        onClick={() => editButtonHandler(item)} 
-                                    >
-                                        {item.schoolName}
-                                    </Button>
+                                    <div key={item.id}>
+                                        <Button  
+                                            className="edu-item" 
+                                            onClick={() => editButtonHandler(item)} 
+                                        >
+                                            {item.schoolName}
+                                        </Button>
+                                        <Button
+                                            className="remove-item" 
+                                            onClick={() => removeButtonHandler(item.id)}
+                                        >
+                                            Remove
+                                        </Button>
+                                    </div>
                                 )
                             })
                         }
