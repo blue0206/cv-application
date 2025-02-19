@@ -2,6 +2,7 @@ import './styles/app.style.css';
 import { General, Education, Work, Preview } from './components';
 import { EducationFormData, GeneralInfoFormData, WorkExperienceFormData } from './interfaces';
 import { useState } from 'react';
+import { Analytics } from '@vercel/analytics/react';
 
 function App() {
 	const [generalFormData, setGeneralFormData] = useState<GeneralInfoFormData>({
@@ -80,6 +81,7 @@ function App() {
 					/>
 				</div>
 			</main>
+			<Analytics />
 		</>
     );
 }
